@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
+	<style>
+	*{margin:0;padding: 0;list-style: none}
+		ul{width:300px;height: 300px;border: 1px solid #ccc;margin:10 auto;position: relative;}
+		li{width:16px;height: 16px;background: green;float:left;margin:7px;border-radius: 100%;opacity:0;}
+		li.black{display: block;background: black;opacity:1;}
+		li.red{display: block;background: red;opacity:1;}
+		canvas{position:absolute;top:-15px;left: -15px;z-index: -99}
+	</style>
+</head>
+<body>	
+	<ul>
+		<canvas id='can' width='700' height="700"></canvas>
+	</ul>
+	
+
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+
+		for(var i=0;i<100;i++){
+			var oLi=$('<li></li>');
+			$('ul').append(oLi);
+
+		}
+
+		$('li').attr('index',0)
+		function qipan(){
+			var oCan=document.getElementById('can');
+		 	var ctx=oCan.getContext('2d');	 	
+		 	for(var i=0;i<10;i++){
+		 		ctx.beginPath();
+		 		ctx.lineWidth=1;
+		 		ctx.strokeStyle='#000';
+		 		var hx=30;
+		 		var hy=30+i*30;
+		 		ctx.moveTo(hx,hy);
+		 		ctx.lineTo(300,hy);	 		
+		 		ctx.stroke()
+
+		 	};
+		 	for(var i=0;i<10;i++){
+		 		ctx.beginPath();
+		 		ctx.lineWidth=1;
+		 		ctx.strokeStyle='#000';	 		
+		 		var lx=30+i*30;
+				var ly=30;
+		 		ctx.moveTo(lx,ly);
+		 		ctx.lineTo(lx,300);	 		
+		 		ctx.stroke()
+		 	}
+		 	
+		}
+		qipan();
+
+
+
+		var kaiguan=0;
+		$('li').click(function(){
+		 	if(kaiguan==0){
+		 		$(this).attr('class','black');
+		 		$(this).attr('index',1);
+		 		
+		 		kaiguan=1;
+
+		 	}else if(kaiguan==1){
+		 		$(this).attr('class','red');
+		 		kaiguan=0;
+		 		$(this).attr('index',10);
+		 	}
+		 	var b1;
+		 	var b2;
+		 	var b3;
+		 	var b4;
+		 	// 检查横排
+		 	function hp(){
+		 		for(var i=0;i<10;i++){
+					for(var j=0;j<6;j++){
+						var a1=parseInt($('li:eq('+(i*10+j)+')').attr('index'));
+						var a2=parseInt($('li:eq('+((i*10+j)+1)+')').attr('index'));
+						var a3=parseInt($('li:eq('+((i*10+j)+2)+')').attr('index'));
+						var a4=parseInt($('li:eq('+((i*10+j)+3)+')').attr('index'));
+						var a5=parseInt($('li:eq('+((i*10+j)+4)+')').attr('index'));
+						b1=a1+a2+a3+a4+a5;
+						if(b1==5){							
+							alert('黑棋胜利')
+						}else if(b1==50){
+							alert('红棋胜利')
+						}
+					}
+					
+				}	
+		 	}
+		 	hp();
+		 	function zp(){
+		 		for(var i=0;i<10;i++){
+					for(var j=0;j<6;j++){
+						var a1=parseInt($('li:eq('+(j*10+i)+')').attr('index'));
+						var a2=parseInt($('li:eq('+((j*10+i)+10)+')').attr('index'));
+						var a3=parseInt($('li:eq('+((j*10+i)+20)+')').attr('index'));
+						var a4=parseInt($('li:eq('+((j*10+i)+30)+')').attr('index'));
+						var a5=parseInt($('li:eq('+((j*10+i)+40)+')').attr('index'));
+						b2=a1+a2+a3+a4+a5
+						if(b2==5){							
+							alert('黑棋胜利')
+						}else if(b2==50){
+							alert('红棋胜利')
+						}
+					}
+				}	
+		 	}
+		 	zp();
+		 	function xp1(){
+		 		for(var i=0;i<6;i++){
+					for(var j=0;j<6;j++){
+						var a1=parseInt($('li:eq('+(i*10+j)+')').attr('index'));
+						var a2=parseInt($('li:eq('+((i*10+j)+11)+')').attr('index'));
+						var a3=parseInt($('li:eq('+((i*10+j)+22)+')').attr('index'));
+						var a4=parseInt($('li:eq('+((i*10+j)+33)+')').attr('index'));
+						var a5=parseInt($('li:eq('+((i*10+j)+44)+')').attr('index'));
+						b3=a1+a2+a3+a4+a5
+						if(b3==5){							
+							alert('黑棋胜利')
+						}else if(b3==50){
+							alert('红棋胜利')
+						}
+					}
+				}	
+		 	}
+		 	xp1();
+		 	function xp2(){
+		 		for(var i=0;i<6;i++){
+					for(var j=0;j<6;j++){
+						var a1=parseInt($('li:eq('+(i*10-j+9)+')').attr('index'));
+						var a2=parseInt($('li:eq('+((i*10-j+9)+9)+')').attr('index'));
+						var a3=parseInt($('li:eq('+((i*10-j+9)+18)+')').attr('index'));
+						var a4=parseInt($('li:eq('+((i*10-j+9)+27)+')').attr('index'));
+						var a5=parseInt($('li:eq('+((i*10-j+9)+36)+')').attr('index'));
+						b4=a1+a2+a3+a4+a5
+						if(b4==5){							
+							alert('黑棋胜利')
+						}else if(b4==50){
+							alert('红棋胜利')
+						}
+					}
+				}	
+		 	}
+		 	xp2();		
+		})	
+
+	</script>
+</body>
+</html>
+
